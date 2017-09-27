@@ -5,12 +5,16 @@ setlocal indentexpr=GetMarkdownIndent()
 setlocal nolisp
 setlocal autoindent
 
+" Support a., 1., */-/+ markdown lists
+let &formatlistpat='^\s*\d\+\.\s\+\|^\s*\a\.\s\+\|^\s*[+-\*]\s\+'
+" Treat bulleted list as comments so that they are auto-inserted on new line
+setlocal comments=b:*,b:+,b:-
+" Do not format them like comments (combine several onto the same line), though
+setlocal formatoptions-=q
 " Automatically insert bullets
 setlocal formatoptions+=r
 " Do not automatically insert bullets when auto-wrapping with text-width
 setlocal formatoptions-=c
-" Accept various markers as bullets
-setlocal comments=b:*,b:+,b:-
 
 " Automatically continue blockquote on line break
 setlocal comments+=b:>
