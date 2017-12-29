@@ -19,6 +19,9 @@ else
   command! -nargs=+ HtmlHiLink hi def link <args>
 endif
 
+set isfname-=[
+set isfname-=]
+
 syn spell toplevel
 syn case ignore
 syn sync linebreaks=1
@@ -132,6 +135,8 @@ endif
 
 if get(g:, 'vim_markdown_math', 0)
   syn include @tex syntax/tex.vim
+  " tex syntax excludes _ from words, add it back
+  setlocal iskeyword=@,48-57,_,192-255
   "syn region mkdMath start="\\\@<!\$" end="\$" skip="\\\$" contains=@tex keepend
   syn match mkdMath /\$\(\s\|\S\|\\\\\s*\n\)\+\$/ contains=@tex
   syn region mkdMath start="\\\@<!\$\$" end="\$\$" skip="\\\$" contains=@tex keepend
